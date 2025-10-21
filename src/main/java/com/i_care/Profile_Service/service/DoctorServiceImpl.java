@@ -21,28 +21,28 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public Long addDoctor(DoctorDTO doctorDTO) throws ProfileException {
-        logger.info("Checking if Doctor record with name = {} & other provided details exists already or not",doctorDTO.getName());
+        logger.info("Checking if Doctor record with name = {} & other provided details exists already or not", doctorDTO.getName());
         if (doctorDTO.getEmail() != null && doctorRepository.findByEmail(doctorDTO.getEmail()).isPresent()) {
             logger.info(" Doctor already exixts");
             throw new ProfileException(ProfileConstants.DOCTOR_ALREADY_EXISTS);
         }
-        if (doctorDTO.getLicenseNo() != null && doctorRepository.findByLicenseNo(doctorDTO.getLicenseNo()).isPresent()){
+        if (doctorDTO.getLicenseNo() != null && doctorRepository.findByLicenseNo(doctorDTO.getLicenseNo()).isPresent()) {
             logger.info(" Doctor already exixts");
             throw new ProfileException(ProfileConstants.DOCTOR_ALREADY_EXISTS);
         }
-        logger.info(" Doctor name = {} saved to the system",doctorDTO.getName());
+        logger.info(" Doctor name = {} saved to the system", doctorDTO.getName());
         return doctorRepository.save(doctorDTO.toEntity()).getId();
     }
 
     @Override
     public DoctorDTO getDoctorById(Long id) throws ProfileException {
         Doctor doctor = doctorRepository.findById(id).orElse(null);
-        logger.info("Trying to find Doctor with id = {} in system",id);
+        logger.info("Trying to find Doctor with id = {} in system", id);
         if (doctor == null) {
-            logger.info("Doctor with id = {} not found in system",id);
+            logger.info("Doctor with id = {} not found in system", id);
             throw new ProfileException(ProfileConstants.DOCTOR_NOT_FOUND);
         } else {
-            logger.info("Doctor with id = {} found in system",id);
+            logger.info("Doctor with id = {} found in system", id);
             return doctor.toDTO();
         }
     }

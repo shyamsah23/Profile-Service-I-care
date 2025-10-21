@@ -22,29 +22,29 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Long addPatient(PatientDTO patientDTO) throws ProfileException {
-        logger.info("Checking if Patient with name = {} & other provided details exists already or not",patientDTO.getName());
-        if (patientDTO.getEmail() != null && patientRepository.findByEmail(patientDTO.getEmail()).isPresent()){
+        logger.info("Checking if Patient with name = {} & other provided details exists already or not", patientDTO.getName());
+        if (patientDTO.getEmail() != null && patientRepository.findByEmail(patientDTO.getEmail()).isPresent()) {
             logger.info(" Patient already exixts");
             throw new ProfileException(ProfileConstants.PATIENT_ALREADY_EXISTS);
         }
 
-        if (patientDTO.getAadhaarNo() != null && patientRepository.findByAadhaarNo(patientDTO.getAadhaarNo()).isPresent()){
+        if (patientDTO.getAadhaarNo() != null && patientRepository.findByAadhaarNo(patientDTO.getAadhaarNo()).isPresent()) {
             logger.info(" Patient already exixts");
             throw new ProfileException(ProfileConstants.PATIENT_ALREADY_EXISTS);
         }
-        logger.info(" Patient name = {} saved to the system",patientDTO.getName());
+        logger.info(" Patient name = {} saved to the system", patientDTO.getName());
         return patientRepository.save(patientDTO.toEntity()).getId();
     }
 
     @Override
     public PatientDTO getPatientById(Long id) throws ProfileException {
         Patient patient = patientRepository.findById(id).orElse(null);
-        logger.info("Trying to find Patient with id = {} in system",id);
+        logger.info("Trying to find Patient with id = {} in system", id);
         if (patient == null) {
-            logger.info("Patient with id = {} not found in system",id);
+            logger.info("Patient with id = {} not found in system", id);
             throw new ProfileException(ProfileConstants.PATIENT_NOT_FOUND);
         } else {
-            logger.info("Patient with id = {} found in system",id);
+            logger.info("Patient with id = {} found in system", id);
             return patient.toDTO();
         }
     }

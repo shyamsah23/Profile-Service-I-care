@@ -33,9 +33,9 @@ public class PatientController {
 
     @GetMapping("/get/{id}")
     public ResponseEntity<PatientDTO> getPatientById(@PathVariable Long id) throws ProfileException {
-        logger.info("Getting Patient info by id = {}",id);
-        PatientDTO patientDetails=patientService.getPatientById(id);
+        logger.info("Getting Patient info by id = {}", id);
+        PatientDTO patientDetails = patientService.getPatientById(id);
         logger.info("Fetched Patient Details Successfully");
-        return new ResponseEntity<>(patientDetails,HttpStatus.FOUND);
+        return new ResponseEntity<>(patientDetails, HttpStatus.FOUND);
     }
 }
