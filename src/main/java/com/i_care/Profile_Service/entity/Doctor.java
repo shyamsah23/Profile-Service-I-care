@@ -1,6 +1,6 @@
 package com.i_care.Profile_Service.entity;
 
-import com.i_care.Profile_Service.Enums.BloodGroup;
+import com.i_care.Profile_Service.dto.DoctorDTO;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -15,22 +15,23 @@ public class Doctor {
     @Column(unique = true)
     private String email;
     private LocalDate dob;
+    @Column(unique = true)
     private String phone;
     private String address;
     @Column(unique = true)
-    private String aadhaarNo;
+    private String licenseNo;
     private String specialization;
     private String department;
     private Integer totalExp;
 
-    public Doctor(Long id, String name, String email, LocalDate dob, String phone, String address, String aadhaarNo, String specialization, String department, Integer totalExp) {
+    public Doctor(Long id, String name, String email, LocalDate dob, String phone, String address, String licenseNo, String specialization, String department, Integer totalExp) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.address = address;
         this.dob = dob;
-        this.aadhaarNo = aadhaarNo;
+        this.licenseNo = licenseNo;
         this.specialization = specialization;
         this.department = department;
         this.totalExp = totalExp;
@@ -88,11 +89,11 @@ public class Doctor {
     }
 
     public String getAadhaarNo() {
-        return aadhaarNo;
+        return licenseNo;
     }
 
-    public void setAadhaarNo(String aadhaarNo) {
-        this.aadhaarNo = aadhaarNo;
+    public void setAadhaarNo(String licenseNo) {
+        this.licenseNo = licenseNo;
     }
 
     public String getSpecialization() {
@@ -117,5 +118,9 @@ public class Doctor {
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public DoctorDTO toDTO() {
+        return new DoctorDTO(this.id, this.name, this.email,this.dob,  this.phone, this.address, this.licenseNo, this.specialization, this.department, this.totalExp);
     }
 }

@@ -1,6 +1,7 @@
 package com.i_care.Profile_Service.entity;
 
 import com.i_care.Profile_Service.Enums.BloodGroup;
+import com.i_care.Profile_Service.dto.PatientDTO;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -8,7 +9,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "Patient")
-public class Patient {
+public class Patient{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,6 +17,7 @@ public class Patient {
     @Column(unique = true)
     private String email;
     private LocalDate dob;
+    @Column(unique = true)
     private String phone;
     private String address;
     @Column(unique = true)
@@ -102,4 +104,7 @@ public class Patient {
         this.bloodGroup = bloodGroup;
     }
 
+    public PatientDTO toDTO() {
+        return new PatientDTO(this.id, this.name, this.email, this.dob, this.phone, this.address, this.aadhaarNo, this.bloodGroup);
+    }
 }
