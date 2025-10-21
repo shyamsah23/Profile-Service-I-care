@@ -20,9 +20,9 @@ public class ExceptionControllerAdvice {
 
 
     @ExceptionHandler(ExecutionControl.UserException.class)
-    public ResponseEntity<ErrorInfo> exceptionHandleForUserException(ExecutionControl.UserException e){
-        ErrorInfo errorInfo = new ErrorInfo(e.getMessage(), (long) HttpStatus.INTERNAL_SERVER_ERROR.value(),LocalDateTime.now());
-        return new ResponseEntity<>(errorInfo,HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<ErrorInfo> exceptionHandleForUserException(ExecutionControl.UserException e) {
+        ErrorInfo errorInfo = new ErrorInfo(e.getMessage(), (long) HttpStatus.INTERNAL_SERVER_ERROR.value(), LocalDateTime.now());
+        return new ResponseEntity<>(errorInfo, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }

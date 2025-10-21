@@ -29,11 +29,12 @@ public class PatientDTO {
         this.address = address;
         this.dob = dob;
         this.aadhaarNo = aadhaarNo;
-        this.bloodGroup=bloodGroup;
+        this.bloodGroup = bloodGroup;
     }
 
     public PatientDTO() {
     }
+
     public Long getId() {
         return id;
     }
@@ -98,7 +99,7 @@ public class PatientDTO {
         this.bloodGroup = bloodGroup;
     }
 
-    public Patient toEntity(){
-        return new Patient(this.id,this.name,this.email,this.dob,this.phone,this.address,this.aadhaarNo,this.bloodGroup);
+    public Patient toEntity() {
+        return new Patient(this.id, this.name, this.email, this.dob, this.phone, this.address, this.aadhaarNo, this.bloodGroup);
     }
 }

@@ -18,12 +18,12 @@ public class PatientController {
     private PatientService patientService;
 
     @PostMapping("/add")
-    public ResponseEntity<Long>addPatient(@RequestBody PatientDTO patientDTO) throws ProfileException {
-        return new ResponseEntity<>(patientService.addPatient( patientDTO), HttpStatus.CREATED);
+    public ResponseEntity<Long> addPatient(@RequestBody PatientDTO patientDTO) throws ProfileException {
+        return new ResponseEntity<>(patientService.addPatient(patientDTO), HttpStatus.CREATED);
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<PatientDTO>getPatientById(@PathVariable Long id) throws ProfileException {
+    public ResponseEntity<PatientDTO> getPatientById(@PathVariable Long id) throws ProfileException {
         return new ResponseEntity<>(patientService.getPatientById(id), HttpStatus.CREATED);
     }
 }
