@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: Profile-Service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/profileDb
+    username: root
+    password: ${DB_PASS}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+server:
+  port: ${DB_SERVER_PORT}
+
+jwt:
+  secret:
+    key: ${JWT_SECRET_KEY}
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui
+
+secret:
+  header:
+    key: ${SECRET_HEADER_KEY}
