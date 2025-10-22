@@ -1,10 +1,13 @@
 package com.i_care.Profile_Service.service;
 
+import com.i_care.Profile_Service.client.NotificationFeignClient;
 import com.i_care.Profile_Service.controller.DoctorController;
 import com.i_care.Profile_Service.dto.DoctorDTO;
+import com.i_care.Profile_Service.dto.EmailWithHtmlDTO;
 import com.i_care.Profile_Service.entity.Doctor;
 import com.i_care.Profile_Service.exception.ProfileException;
 import com.i_care.Profile_Service.repository.DoctorRepository;
+import com.i_care.Profile_Service.utility.NotificationConstants;
 import com.i_care.Profile_Service.utility.ProfileConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +22,9 @@ public class DoctorServiceImpl implements DoctorService {
     @Autowired
     private DoctorRepository doctorRepository;
 
+    @Autowired
+    private NotificationFeignClient notificationFeignClient;
+
     @Override
     public Long addDoctor(DoctorDTO doctorDTO) throws ProfileException {
         logger.info("Checking if Doctor record with name = {} & other provided details exists already or not", doctorDTO.getName());
@@ -31,6 +37,9 @@ public class DoctorServiceImpl implements DoctorService {
             throw new ProfileException(ProfileConstants.DOCTOR_ALREADY_EXISTS);
         }
         logger.info(" Doctor name = {} saved to the system", doctorDTO.getName());
+        EmailWithHtmlDTO emailWithHtmlDTO =new EmailWithHtmlDTO("shyamlakhan46@gmail.com","Doctor", NotificationConstants.DOCTOR_REGISTER);
+        notificationFeignClient.sendMailWithHTML(emailWithHtmlDTO);
+        logger.info("Mail sent successfully");
         return doctorRepository.save(doctorDTO.toEntity()).getId();
     }
 
