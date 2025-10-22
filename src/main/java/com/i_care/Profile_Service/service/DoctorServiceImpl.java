@@ -37,7 +37,7 @@ public class DoctorServiceImpl implements DoctorService {
             throw new ProfileException(ProfileConstants.DOCTOR_ALREADY_EXISTS);
         }
         logger.info(" Doctor name = {} saved to the system", doctorDTO.getName());
-        EmailWithHtmlDTO emailWithHtmlDTO =new EmailWithHtmlDTO("shyamlakhan46@gmail.com","Doctor", NotificationConstants.DOCTOR_REGISTER);
+        EmailWithHtmlDTO emailWithHtmlDTO =new EmailWithHtmlDTO(doctorDTO.getEmail(),"Doctor", NotificationConstants.DOCTOR_REGISTER);
         notificationFeignClient.sendMailWithHTML(emailWithHtmlDTO);
         logger.info("Mail sent successfully");
         return doctorRepository.save(doctorDTO.toEntity()).getId();
