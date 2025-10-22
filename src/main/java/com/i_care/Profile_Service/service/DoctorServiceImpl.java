@@ -28,15 +28,15 @@ public class DoctorServiceImpl implements DoctorService {
     public Long addDoctor(DoctorDTO doctorDTO) throws ProfileException {
         logger.info("Checking if Doctor record with name = {} & other provided details exists already or not", doctorDTO.getName());
         if (doctorDTO.getEmail() != null && doctorRepository.findByEmail(doctorDTO.getEmail()).isPresent()) {
-            logger.info(" Doctor already exixts");
+            logger.info(" Doctor already exits");
             throw new ProfileException(ProfileConstants.DOCTOR_ALREADY_EXISTS);
         }
         if (doctorDTO.getLicenseNo() != null && doctorRepository.findByLicenseNo(doctorDTO.getLicenseNo()).isPresent()) {
-            logger.info(" Doctor already exixts");
+            logger.info(" Doctor already exits");
             throw new ProfileException(ProfileConstants.DOCTOR_ALREADY_EXISTS);
         }
         logger.info(" Doctor name = {} saved to the system", doctorDTO.getName());
-        EmailWithHtmlDTO emailWithHtmlDTO = new EmailWithHtmlDTO(doctorDTO.getEmail(), "Doctor", NotificationConstants.DOCTOR_REGISTER);
+        EmailWithHtmlDTO emailWithHtmlDTO = new EmailWithHtmlDTO(doctorDTO.getId(),doctorDTO.getEmail(), NotificationConstants.DOCTOR_REGISTER_SUBJECT, NotificationConstants.DOCTOR_REGISTER);
         notificationFeignClient.sendMailWithHTML(emailWithHtmlDTO);
         logger.info("Mail sent successfully");
         return doctorRepository.save(doctorDTO.toEntity()).getId();

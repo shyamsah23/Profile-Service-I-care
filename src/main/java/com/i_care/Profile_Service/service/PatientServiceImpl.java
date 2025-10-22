@@ -39,7 +39,7 @@ public class PatientServiceImpl implements PatientService {
             throw new ProfileException(ProfileConstants.PATIENT_ALREADY_EXISTS);
         }
         logger.info(" Patient name = {} saved to the system", patientDTO.getName());
-        EmailWithHtmlDTO emailWithHtmlDTO = new EmailWithHtmlDTO(patientDTO.getEmail(), "Patient", NotificationConstants.PATIENT_REGISTER);
+        EmailWithHtmlDTO emailWithHtmlDTO = new EmailWithHtmlDTO(patientDTO.getId(),patientDTO.getEmail(), NotificationConstants.PATIENT_REGISTER_SUBJECT, NotificationConstants.PATIENT_REGISTER);
         notificationFeignClient.sendMailWithHTML(emailWithHtmlDTO);
         logger.info("Mail sent successfully");
         return patientRepository.save(patientDTO.toEntity()).getId();
