@@ -28,7 +28,7 @@ public class PatientController {
         logger.info("Adding Patient - name = {}", patientDTO.getName());
         Long id = patientService.addPatient(patientDTO);
         logger.info("Successfully Added Patient to the Record");
-        return new ResponseEntity<>(id, HttpStatus.CREATED);
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
     @GetMapping("/get/{id}")
@@ -36,6 +36,6 @@ public class PatientController {
         logger.info("Getting Patient info by id = {}", id);
         PatientDTO patientDetails = patientService.getPatientById(id);
         logger.info("Fetched Patient Details Successfully");
-        return new ResponseEntity<>(patientDetails, HttpStatus.FOUND);
+        return new ResponseEntity<>(patientDetails, HttpStatus.OK);
     }
 }
