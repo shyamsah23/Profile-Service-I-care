@@ -54,4 +54,9 @@ public class DoctorServiceImpl implements DoctorService {
             return doctor.toDTO();
         }
     }
+
+    @Override
+    public Boolean doctorExists(Long id) throws ProfileException{
+        return doctorRepository.existsById(id);
+    }
 }

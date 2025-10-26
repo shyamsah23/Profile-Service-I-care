@@ -35,7 +35,12 @@ public class DoctorController {
         logger.info("Getting doctor info with id = {}", id);
         DoctorDTO doctorDetails = doctorService.getDoctorById(id);
         logger.info("Fetched Doctor Details Successfully");
-        return new ResponseEntity<>(doctorDetails, HttpStatus.FOUND);
+        return new ResponseEntity<>(doctorDetails, HttpStatus.OK);
 
+    }
+
+    @GetMapping("/exists/{id}")
+    public ResponseEntity<Boolean> doctorExists(@PathVariable Long id) throws ProfileException{
+        return new ResponseEntity<>(doctorService.doctorExists(id),HttpStatus.OK);
     }
 }

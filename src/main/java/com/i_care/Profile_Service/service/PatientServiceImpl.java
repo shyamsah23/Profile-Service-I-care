@@ -21,10 +21,10 @@ public class PatientServiceImpl implements PatientService {
     Logger logger = LoggerFactory.getLogger(PatientServiceImpl.class);
 
     @Autowired
-    PatientRepository patientRepository;
+    private PatientRepository patientRepository;
 
     @Autowired
-    NotificationFeignClient notificationFeignClient;
+    private NotificationFeignClient notificationFeignClient;
 
     @Override
     public Long addPatient(PatientDTO patientDTO) throws ProfileException {
@@ -38,6 +38,7 @@ public class PatientServiceImpl implements PatientService {
             logger.info(" Patient already exixts");
             throw new ProfileException(ProfileConstants.PATIENT_ALREADY_EXISTS);
         }
+
         logger.info(" Patient name = {} saved to the system", patientDTO.getName());
         EmailWithHtmlDTO emailWithHtmlDTO = new EmailWithHtmlDTO(patientDTO.getId(),patientDTO.getEmail(), NotificationConstants.PATIENT_REGISTER_SUBJECT, NotificationConstants.PATIENT_REGISTER);
         notificationFeignClient.sendMailWithHTML(emailWithHtmlDTO);
@@ -58,4 +59,8 @@ public class PatientServiceImpl implements PatientService {
         }
     }
 
+    @Override
+    public Boolean patientExists(Long id) throws ProfileException{
+        return patientRepository.existsById(id);
+    }
 }

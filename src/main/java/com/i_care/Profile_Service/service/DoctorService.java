@@ -7,4 +7,6 @@ public interface DoctorService {
     public Long addDoctor(DoctorDTO doctorDTO) throws ProfileException;
 
     public DoctorDTO getDoctorById(Long id) throws ProfileException;
+
+    public Boolean doctorExists(Long id) throws ProfileException;
 }
