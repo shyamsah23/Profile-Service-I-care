@@ -28,7 +28,7 @@ public class PatientController {
         logger.info("Adding Patient - name = {}", patientDTO.getName());
         Long id = patientService.addPatient(patientDTO);
         logger.info("Successfully Added Patient to the Record");
-        return new ResponseEntity<>(id, HttpStatus.CREATED);
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 
     @GetMapping("/get/{id}")
@@ -40,7 +40,7 @@ public class PatientController {
     }
 
     @GetMapping("/exists/{id}")
-    public ResponseEntity<Boolean> patientExists(@PathVariable Long id) throws ProfileException{
-        return new ResponseEntity<>(patientService.patientExists(id),HttpStatus.OK);
+    public ResponseEntity<Boolean> patientExists(@PathVariable Long id) throws ProfileException {
+        return new ResponseEntity<>(patientService.patientExists(id), HttpStatus.OK);
     }
 }

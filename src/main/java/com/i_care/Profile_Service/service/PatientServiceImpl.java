@@ -30,20 +30,21 @@ public class PatientServiceImpl implements PatientService {
     public Long addPatient(PatientDTO patientDTO) throws ProfileException {
         logger.info("Checking if Patient with name = {} & other provided details exists already or not", patientDTO.getName());
         if (patientDTO.getEmail() != null && patientRepository.findByEmail(patientDTO.getEmail()).isPresent()) {
-            logger.info(" Patient already exixts");
+            logger.info(" Patient already exists");
             throw new ProfileException(ProfileConstants.PATIENT_ALREADY_EXISTS);
         }
 
         if (patientDTO.getAadhaarNo() != null && patientRepository.findByAadhaarNo(patientDTO.getAadhaarNo()).isPresent()) {
-            logger.info(" Patient already exixts");
+            logger.info(" Patient already exists");
             throw new ProfileException(ProfileConstants.PATIENT_ALREADY_EXISTS);
         }
-
-        logger.info(" Patient name = {} saved to the system", patientDTO.getName());
-        EmailWithHtmlDTO emailWithHtmlDTO = new EmailWithHtmlDTO(patientDTO.getId(),patientDTO.getEmail(), NotificationConstants.PATIENT_REGISTER_SUBJECT, NotificationConstants.PATIENT_REGISTER);
+        long id = patientRepository.save(patientDTO.toEntity()).getId();
+        patientDTO.setId(id);
+        logger.info(" Patient name = {} saved to the system with id={}", patientDTO.getName(), patientDTO.getId());
+        EmailWithHtmlDTO emailWithHtmlDTO = new EmailWithHtmlDTO(id, patientDTO.getEmail(), NotificationConstants.PATIENT_REGISTER_SUBJECT, NotificationConstants.PATIENT_REGISTER);
         notificationFeignClient.sendMailWithHTML(emailWithHtmlDTO);
         logger.info("Mail sent successfully");
-        return patientRepository.save(patientDTO.toEntity()).getId();
+        return id;
     }
 
     @Override
@@ -60,7 +61,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public Boolean patientExists(Long id) throws ProfileException{
+    public Boolean patientExists(Long id) throws ProfileException {
         return patientRepository.existsById(id);
     }
 }
