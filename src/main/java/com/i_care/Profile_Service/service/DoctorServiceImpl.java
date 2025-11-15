@@ -11,7 +11,10 @@ import com.i_care.Profile_Service.utility.ProfileConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class DoctorServiceImpl implements DoctorService {
@@ -60,5 +63,14 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public Boolean doctorExists(Long id) throws ProfileException {
         return doctorRepository.existsById(id);
+    }
+
+    @Override
+    @Cacheable(value = "allDoctors")
+    public List<Doctor> getAllDoctor() {
+        logger.info("Started Fetching List of Doctors");
+        List<Doctor> listOfAllDoctors = doctorRepository.findAll();
+        logger.info("Fetch all doctors list Successfully");
+        return listOfAllDoctors;
     }
 }

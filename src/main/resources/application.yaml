@@ -2,6 +2,13 @@ spring:
   application:
     name: Profile-Service
 
+  cache:
+    type: redis
+  redis:
+    port: ${REDIS_PORT:6379}
+    host: ${REDIS_HOSt:localhost}
+    time-to-live: ${TIME_TO_LIVE:300000}
+
   datasource:
     url: jdbc:mysql://localhost:3306/profiledb
     username: root
@@ -29,3 +36,4 @@ springdoc:
 secret:
   header:
     key: ${SECRET_HEADER_KEY}
+
