@@ -54,4 +54,12 @@ public class DoctorController {
         logger.info("Fetched List of doctorr with size = {}",listOfDoctors.size());
         return new ResponseEntity<>(listOfDoctors,HttpStatus.OK);
     }
+
+    @GetMapping("/all-doctors/department")
+    public ResponseEntity<List<Doctor>> getAllDoctorsByDepartment(@RequestParam String department) {
+        logger.info("Fetching all Doctors by Department = {}",department);
+        List<Doctor> listOfDoctorsByDepartment = doctorService.getAllDoctorsByDepartment(department);
+        logger.info("Successfully Fetched List of Doctor by department with Size = {}",listOfDoctorsByDepartment.size());
+        return new ResponseEntity<>(listOfDoctorsByDepartment,HttpStatus.OK);
+    }
 }

@@ -73,4 +73,13 @@ public class DoctorServiceImpl implements DoctorService {
         logger.info("Fetch all doctors list Successfully");
         return listOfAllDoctors;
     }
+
+    @Override
+    @Cacheable(value = "doctorsByDepartment")
+    public List<Doctor> getAllDoctorsByDepartment(String department) {
+        logger.info("Started Fetching List of doctors By Department -> In Service");
+        List<Doctor> listOfDoctorsByDepartment = doctorRepository.findBySpecialization(department);
+        logger.info("Fetched Doctors by Department");
+        return listOfDoctorsByDepartment;
+    }
 }
