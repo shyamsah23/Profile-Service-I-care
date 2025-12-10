@@ -3,11 +3,13 @@ package com.i_care.Profile_Service.entity;
 import com.i_care.Profile_Service.dto.DoctorDTO;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "Doctor")
-public class Doctor {
+public class Doctor implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -88,11 +90,11 @@ public class Doctor {
         this.address = address;
     }
 
-    public String getAadhaarNo() {
+    public String getLicenseNo() {
         return licenseNo;
     }
 
-    public void setAadhaarNo(String licenseNo) {
+    public void setLicenseNo(String licenseNo) {
         this.licenseNo = licenseNo;
     }
 
@@ -121,6 +123,6 @@ public class Doctor {
     }
 
     public DoctorDTO toDTO() {
-        return new DoctorDTO(this.id, this.name, this.email,this.dob,  this.phone, this.address, this.licenseNo, this.specialization, this.department, this.totalExp);
+        return new DoctorDTO(this.id, this.name, this.email, this.dob, this.phone, this.address, this.licenseNo, this.specialization, this.department, this.totalExp);
     }
 }

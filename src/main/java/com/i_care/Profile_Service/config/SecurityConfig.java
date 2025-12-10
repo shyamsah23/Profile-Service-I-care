@@ -13,7 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-public class ProfileConfig {
+public class SecurityConfig {
 
     @Value("${secret.header.key}")
     private String secretKeyForHeader;
