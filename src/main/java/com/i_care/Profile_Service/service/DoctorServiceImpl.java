@@ -27,7 +27,7 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public Long addDoctor(DoctorDTO doctorDTO) throws ProfileException {
         logger.info("Checking if Doctor record with name = {} & other provided details exists already or not", doctorDTO.getName());
-        if (doctorDTO.getEmail() != null && doctorRepository.findByEmail(doctorDTO.getEmail()).isPresent()) {
+        if (doctorDTO.getEmail() != null && doctorRepository.findByEmail(doctorDTO.getEmail())!=null) {
             logger.info("Doctor already exits");
             throw new ProfileException(ProfileConstants.DOCTOR_ALREADY_EXISTS);
         }
@@ -42,6 +42,22 @@ public class DoctorServiceImpl implements DoctorService {
         notificationFeignClient.sendMailWithHTML(emailWithHtmlDTO);
         logger.info("Mail sent successfully");
         return id;
+    }
+
+    @Override
+    public void updateDoctor(DoctorDTO doctor) throws ProfileException {
+        logger.info("email is={}",doctor.getEmail());
+        if(!doctorRepository.existsById(doctor.getId())) throw new ProfileException(ProfileConstants.DOCTOR_NOT_FOUND);
+        DoctorDTO existingDoctor =doctorRepository.findByEmail(doctor.getEmail()).toDTO();
+        existingDoctor.setDob(doctor.getDob());
+        existingDoctor.setAddress(doctor.getAddress());
+        existingDoctor.setDepartment(doctor.getDepartment());
+        existingDoctor.setPhone(doctor.getPhone());
+        existingDoctor.setLicenseNo(doctor.getLicenseNo());
+        existingDoctor.setSpecialization(doctor.getSpecialization());
+        existingDoctor.setTotalExp(doctor.getTotalExp());
+
+        doctorRepository.save(existingDoctor.toEntity());
     }
 
     @Override
