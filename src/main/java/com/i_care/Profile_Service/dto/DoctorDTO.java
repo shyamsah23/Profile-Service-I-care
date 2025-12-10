@@ -104,7 +104,7 @@ public class DoctorDTO {
         this.department = department;
     }
 
-    public Integer getTotalExp() {
+    public Integer getTotalExp( ) {
         return totalExp;
     }
 

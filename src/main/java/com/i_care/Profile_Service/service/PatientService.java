@@ -6,6 +6,8 @@ import com.i_care.Profile_Service.exception.ProfileException;
 public interface PatientService {
     public Long addPatient(PatientDTO patient) throws ProfileException;
 
+    public void updatePatient(PatientDTO patient) throws ProfileException;
+
     public PatientDTO getPatientById(Long id) throws ProfileException;
 
     public Boolean patientExists(Long id) throws ProfileException;

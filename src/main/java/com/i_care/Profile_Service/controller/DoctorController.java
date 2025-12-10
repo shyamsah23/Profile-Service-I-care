@@ -1,6 +1,8 @@
 package com.i_care.Profile_Service.controller;
 
 import com.i_care.Profile_Service.dto.DoctorDTO;
+import com.i_care.Profile_Service.dto.PatientDTO;
+import com.i_care.Profile_Service.dto.ResponseDTO;
 import com.i_care.Profile_Service.entity.Doctor;
 import com.i_care.Profile_Service.exception.ProfileException;
 import com.i_care.Profile_Service.service.DoctorService;
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/profile/doctor")
 @Validated
 public class DoctorController {
@@ -31,6 +32,14 @@ public class DoctorController {
         Long id = doctorService.addDoctor(doctorDTO);
         logger.info("Successfully Added Doctor to the Record");
         return new ResponseEntity<>(id, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<ResponseDTO>  updateDoctor(@RequestBody DoctorDTO doctorDTO) throws ProfileException {
+        logger.info("Updating Doctor info with - id = {}", doctorDTO.getId());
+        doctorService.updateDoctor(doctorDTO);
+        logger.info("Successfully Updated Doctor in the Record");
+        return new ResponseEntity<>(new ResponseDTO("Profile updated Successfully"),HttpStatus.OK);
     }
 
     @GetMapping("/get/{id}")

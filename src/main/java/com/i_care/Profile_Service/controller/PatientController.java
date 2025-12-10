@@ -1,6 +1,7 @@
 package com.i_care.Profile_Service.controller;
 
 import com.i_care.Profile_Service.dto.PatientDTO;
+import com.i_care.Profile_Service.dto.ResponseDTO;
 import com.i_care.Profile_Service.exception.ProfileException;
 import com.i_care.Profile_Service.service.PatientService;
 import org.slf4j.LoggerFactory;
@@ -13,7 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/profile/patient")
 @Validated
 public class PatientController {
@@ -27,8 +27,16 @@ public class PatientController {
     public ResponseEntity<Long> addPatient(@RequestBody PatientDTO patientDTO) throws ProfileException {
         logger.info("Adding Patient - name = {}", patientDTO.getName());
         Long id = patientService.addPatient(patientDTO);
-        logger.info("Successfully Added Patient to the Record");
+        logger.info("Successfully Added Patient in the Record");
         return new ResponseEntity<>(id, HttpStatus.OK);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<ResponseDTO>  updatePatient(@RequestBody PatientDTO patientDTO) throws ProfileException {
+        logger.info("Updating Patient info with - id = {}", patientDTO.getId());
+        patientService.updatePatient(patientDTO);
+        logger.info("Successfully Updated Patient in the Record");
+        return new ResponseEntity<>(new ResponseDTO("Profile updated Successfully"),HttpStatus.OK);
     }
 
     @GetMapping("/get/{id}")

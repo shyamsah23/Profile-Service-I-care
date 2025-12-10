@@ -20,7 +20,7 @@ spring:
     show-sql: true
 
 server:
-  port: ${SERVER_PORT:8087}
+  port: ${SERVER_PORT}
 
 jwt:
   secret:
