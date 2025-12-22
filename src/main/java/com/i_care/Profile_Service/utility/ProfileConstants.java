@@ -10,7 +10,8 @@ public class ProfileConstants {
 
     public static final String DOCTOR_ALREADY_EXISTS = "Doctor already exists.";
     public static final String PATIENT_ALREADY_EXISTS = "Patient already exists.";
+    public static final String ADMIN_ALREADY_EXISTS = "Admin already exists.";
     public static final String DOCTOR_NOT_FOUND = "Doctor not found.";
     public static final String PATIENT_NOT_FOUND = "Patient not found.";
-
+    public static final String ADMIN_NOT_FOUND = "Admin not found.";
 }
