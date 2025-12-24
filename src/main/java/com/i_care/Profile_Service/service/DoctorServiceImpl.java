@@ -82,7 +82,7 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    @Cacheable(value = "allDoctors")
+//    @Cacheable(value = "allDoctors")
     public List<Doctor> getAllDoctor() {
         logger.info("Started Fetching List of Doctors");
         List<Doctor> listOfAllDoctors = doctorRepository.findAll();
@@ -91,7 +91,7 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    @Cacheable(value = "doctorsByDepartment")
+//    @Cacheable(value = "doctorsByDepartment")
     public List<Doctor> getAllDoctorsByDepartment(String department) {
         logger.info("Started Fetching List of doctors By Department -> In Service");
         List<Doctor> listOfDoctorsByDepartment = doctorRepository.findBySpecialization(department);

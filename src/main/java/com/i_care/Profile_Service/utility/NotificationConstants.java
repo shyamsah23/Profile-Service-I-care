@@ -11,4 +11,6 @@ public class NotificationConstants {
     public static final String PATIENT_REGISTER = "PATIENT_REGISTER";
     public static final String DOCTOR_REGISTER_SUBJECT = "Congratulations! Your i-Care Doctor Account is Ready";
     public static final String PATIENT_REGISTER_SUBJECT = "Congratulations! Your i-Care Patient Account is Ready";
+    public static final String ADMIN__REGISTER = "ADMIN_REGISTER";
+    public static final String ADMIN_REGISTER_SUBJECT = "Congratulations! Your i-Care Admin Account is Ready";
 }

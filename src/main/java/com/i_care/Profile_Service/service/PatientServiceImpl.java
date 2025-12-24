@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -76,5 +77,11 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public Boolean patientExists(Long id) throws ProfileException {
         return patientRepository.existsById(id);
+    }
+
+    @Override
+    public List<PatientDTO> getAllPatients() throws ProfileException {
+        List<PatientDTO>patients=patientRepository.findAll().stream().map(Patient::toDTO).toList();
+        return patients;
     }
 }

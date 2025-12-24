@@ -60,7 +60,7 @@ public class DoctorController {
     public ResponseEntity<List<Doctor>> getAllDoctors() {
         logger.info("Fetching all List Of Doctors");
         List<Doctor> listOfDoctors = doctorService.getAllDoctor();
-        logger.info("Fetched List of doctorr with size = {}",listOfDoctors.size());
+        logger.info("Fetched List of doctors with size = {}",listOfDoctors.size());
         return new ResponseEntity<>(listOfDoctors,HttpStatus.OK);
     }
 

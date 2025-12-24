@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/profile/patient")
 @Validated
@@ -50,5 +52,13 @@ public class PatientController {
     @GetMapping("/exists/{id}")
     public ResponseEntity<Boolean> patientExists(@PathVariable Long id) throws ProfileException {
         return new ResponseEntity<>(patientService.patientExists(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/all-patients")
+    public ResponseEntity<List<PatientDTO>> getAllPatients() throws ProfileException{
+        logger.info("Fetching all List Of Patients");
+        List<PatientDTO> listOffPatients=patientService.getAllPatients();
+        logger.info("Fetched List of patients with size = {}",listOffPatients.size());
+        return new ResponseEntity<>(listOffPatients,HttpStatus.OK);
     }
 }
