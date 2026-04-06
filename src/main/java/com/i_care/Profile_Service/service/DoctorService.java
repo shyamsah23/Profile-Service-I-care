@@ -17,6 +17,10 @@ public interface DoctorService {
 
     public Boolean doctorExists(Long id) throws ProfileException;
 
+    public DoctorDTO getDoctorByEmail(String email) throws ProfileException;
+
+    public Boolean doctorExists(String email) throws ProfileException;
+
     public List<Doctor> getAllDoctor();
 
     public List<Doctor> getAllDoctorsByDepartment(String department);

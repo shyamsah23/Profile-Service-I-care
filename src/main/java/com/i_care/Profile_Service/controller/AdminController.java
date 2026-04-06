@@ -37,4 +37,9 @@ public class AdminController {
         logger.info("Fetched Admin Details Successfully");
         return new ResponseEntity<>(adminDetails, HttpStatus.OK);
     }
+
+    @GetMapping("/exists/email/{email}")
+    public ResponseEntity<Boolean> doctorExists(@PathVariable String email) throws ProfileException{
+        return new ResponseEntity<>(adminService.existsAdminByEmail(email),HttpStatus.OK);
+    }
 }

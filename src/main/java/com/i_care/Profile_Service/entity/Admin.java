@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "Admin")
+@Table(name = "admin")
 public class Admin{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

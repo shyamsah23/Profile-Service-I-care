@@ -80,6 +80,25 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
+    public PatientDTO getPatientByEmail(String email) throws ProfileException {
+        Patient patient = patientRepository.findByEmail(email);
+        logger.info("Trying to find Patient with email = {} in system", email);
+        if (patient == null) {
+            logger.info("Patient with id = {} not found in system", email);
+            throw new ProfileException(ProfileConstants.PATIENT_NOT_FOUND);
+        } else {
+            logger.info("Patient with email = {} found in system", email);
+            return patient.toDTO();
+        }
+    }
+
+    @Override
+    public Boolean patientExists(String email) throws ProfileException {
+        Patient data=patientRepository.findByEmail(email);
+        return data != null;
+    }
+
+    @Override
     public List<PatientDTO> getAllPatients() throws ProfileException {
         List<PatientDTO>patients=patientRepository.findAll().stream().map(Patient::toDTO).toList();
         return patients;

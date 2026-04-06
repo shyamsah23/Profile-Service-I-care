@@ -14,5 +14,9 @@ public interface PatientService {
 
     public Boolean patientExists(Long id) throws ProfileException;
 
+    public PatientDTO getPatientByEmail(String email) throws ProfileException;
+
+    public Boolean patientExists(String email) throws ProfileException;
+
     public List<PatientDTO> getAllPatients() throws ProfileException;
 }

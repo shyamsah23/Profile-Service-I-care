@@ -54,6 +54,19 @@ public class PatientController {
         return new ResponseEntity<>(patientService.patientExists(id), HttpStatus.OK);
     }
 
+    @GetMapping("/get/email/{email}")
+    public ResponseEntity<PatientDTO> getPatientById(@PathVariable String email) throws ProfileException {
+        logger.info("Getting Patient info by email = {}", email);
+        PatientDTO patientDetails = patientService.getPatientByEmail(email);
+        logger.info("Fetched Patient Details Successfully");
+        return new ResponseEntity<>(patientDetails, HttpStatus.OK);
+    }
+
+    @GetMapping("/exists/email/{email}")
+    public ResponseEntity<Boolean> patientExists(@PathVariable String email) throws ProfileException {
+        return new ResponseEntity<>(patientService.patientExists(email), HttpStatus.OK);
+    }
+
     @GetMapping("/all-patients")
     public ResponseEntity<List<PatientDTO>> getAllPatients() throws ProfileException{
         logger.info("Fetching all List Of Patients");

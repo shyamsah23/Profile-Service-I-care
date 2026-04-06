@@ -53,4 +53,10 @@ public class AdminServiceImpl implements AdminService {
             return admin.toDTO();
         }
     }
+
+    @Override
+    public Boolean existsAdminByEmail(String email) throws ProfileException {
+        Admin data=adminRepository.findByEmail(email);
+        return data != null;
+    }
 }

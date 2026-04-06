@@ -56,6 +56,20 @@ public class DoctorController {
         return new ResponseEntity<>(doctorService.doctorExists(id),HttpStatus.OK);
     }
 
+    @GetMapping("/get/email/{email}")
+    public ResponseEntity<DoctorDTO> getDoctorByEmail(@PathVariable String email) throws ProfileException {
+        logger.info("Getting doctor info with email = {}", email);
+        DoctorDTO doctorDetails = doctorService.getDoctorByEmail(email);
+        logger.info("Fetched Doctor Details Successfully");
+        return new ResponseEntity<>(doctorDetails, HttpStatus.OK);
+
+    }
+
+    @GetMapping("/exists/email/{email}")
+    public ResponseEntity<Boolean> doctorExists(@PathVariable String email) throws ProfileException{
+        return new ResponseEntity<>(doctorService.doctorExists(email),HttpStatus.OK);
+    }
+
     @GetMapping("/all-doctors")
     public ResponseEntity<List<Doctor>> getAllDoctors() {
         logger.info("Fetching all List Of Doctors");
