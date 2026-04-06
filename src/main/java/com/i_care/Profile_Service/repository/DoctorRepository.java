@@ -15,4 +15,6 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
     public Optional<Doctor> findByLicenseNo(String licenseNo);
 
     public List<Doctor> findBySpecialization(String department);
+
+//    public Boolean existsByEmail(String email);
 }

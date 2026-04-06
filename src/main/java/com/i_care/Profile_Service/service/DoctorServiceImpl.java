@@ -82,6 +82,25 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
+    public DoctorDTO getDoctorByEmail(String email) throws ProfileException {
+        Doctor doctor = doctorRepository.findByEmail(email);
+        logger.info("Trying to find Doctor with email= {} in system", email);
+        if (doctor == null) {
+            logger.info("Doctor with email = {} not found in system", email);
+            throw new ProfileException(ProfileConstants.DOCTOR_NOT_FOUND);
+        } else {
+            logger.info("Doctor with email = {} found in system", email);
+            return doctor.toDTO();
+        }
+    }
+
+    @Override
+    public Boolean doctorExists(String email) throws ProfileException {
+        Doctor data=doctorRepository.findByEmail(email);
+        return data != null;
+    }
+
+    @Override
 //    @Cacheable(value = "allDoctors")
     public List<Doctor> getAllDoctor() {
         logger.info("Started Fetching List of Doctors");
